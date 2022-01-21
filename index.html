@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>行列</title>
+	</head>
+	<body>
+		<p> 行 <input type="number" id="row" min=1 value=1 onchange="change_row(this.value)"> </p>
+		<p> 列 <input type="number" id="column" min=1 value=1 onchange="change_column(this.value)"> </p>
+		<div id="input"><div><input size=3 id="0,0" onchange="print()"></div></div>
+		<div id="output"></div>
+		<button onclick="copy()">コピー</button>
+		<p id="copied"></p>
+		<script type="text/javascript" src="script.js"></script>
+	</body>
+</html>
