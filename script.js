@@ -67,3 +67,31 @@ function copy(){
 	navigator.clipboard.writeText(text.join("\n")).then(copied);
 }
 
+function add_matrix(){
+	matrices = document.getElementById('matrices');
+	factor = document.createElement('textarea');
+	factor.setAttribute('onchange', 'product()');
+	matrices.insertBefore(factor, matrices.lastChild);
+}
+
+var text_product;
+function product(){
+	text_product = [''];
+	matrices = document.getElementById('matrices');
+	for(i = 0; i < matrices.children.length - 1; ++i){
+		split = matrices.children[i].value.split('\n');
+		while(text_product.length < split.length) text_product.push('');
+		for(j = 0; j < split.length; ++j){
+			text_product[j] += split[j];
+		}
+	}
+	document.getElementById("product").innerHTML = text_product.join("<br>");
+}
+
+function copied_product(){
+	document.getElementById("copied_product").innerHTML = "コピーされました";
+}
+
+function copy_product(){
+	navigator.clipboard.writeText(text_product.join("\n")).then(copied_product);
+}
