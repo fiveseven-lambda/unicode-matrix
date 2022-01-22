@@ -2,7 +2,7 @@ var num_row = 1, num_column = 1;
 
 function change_row(value){
 	input = document.getElementById('input');
-	if(value > num_row){
+	while(num_row < value){
 		row = document.createElement('div');
 		for(i = 0; i < num_column; ++i){
 			entry = document.createElement('input');
@@ -12,15 +12,18 @@ function change_row(value){
 			row.appendChild(entry);
 		}
 		input.appendChild(row);
-	}else{
-		input.lastChild.remove();
+		num_row++;
 	}
-	num_row = value;
+	while(num_row > value){
+		input.lastChild.remove();
+		num_row--;
+	}
+	print();
 }
 
 function change_column(value){
 	input = document.getElementById('input');
-	if(value > num_column){
+	while(num_column < value){
 		for(i = 0; i < num_row; ++i){
 			entry = document.createElement('input');
 			entry.setAttribute('size', 3);
@@ -28,32 +31,41 @@ function change_column(value){
 			entry.setAttribute('onchange', 'print()');
 			input.children[i].appendChild(entry);
 		}
-	}else{
+		num_column++;
+	}
+	while(num_column > value){
 		for(i = 0; i < num_row; ++i){
 			input.children[i].lastChild.remove();
 		}
+		num_column--;
 	}
-	num_column = value;
+	print();
 }
 
 var text;
 
+brackets = {
+	round: '()⎛⎜⎝⎞⎟⎠',
+	square: '[]⎡⎢⎣⎤⎥⎦'
+};
+
 function print(){
 	text = []
+	bracket = brackets[document.getElementById('bracket type').value];
 	for(i = 0; i < num_row; ++i){
 		row = ""
-		if(num_row == 1) row += "("
-		else if(i == 0) row += "⎛"
-		else if(i == num_row - 1) row += "⎝"
-		else row += "⎜"
+		if(num_row == 1) row += bracket[0]
+		else if(i == 0) row += bracket[2]
+		else if(i == num_row - 1) row += bracket[4]
+		else row += bracket[3]
 		for(j = 0; j < num_column; ++j){
 			row += document.getElementById(i + "," + j).value;
 			if(j < num_column - 1) row += " ";
 		}
-		if(num_row == 1) row += ")"
-		else if(i == 0) row += "⎞"
-		else if(i == num_row - 1) row += "⎠"
-		else row += "⎟"
+		if(num_row == 1) row += bracket[1]
+		else if(i == 0) row += bracket[5]
+		else if(i == num_row - 1) row += bracket[7]
+		else row += bracket[6]
 		text.push(row);
 	}
 	document.getElementById("output").innerHTML = text.join("<br>");

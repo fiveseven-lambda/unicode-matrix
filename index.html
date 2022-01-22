@@ -5,16 +5,37 @@
 		<title>行列</title>
 	</head>
 	<body>
+		<p>
+			Unicode には
+			⎛ ⎞ ⎝ ⎠
+			といった括弧の要素があり，
+			これを組み合わせて行列を書くことができるようになっています．
+			このページは，
+			行列を楽に入力するためのものです．
+		</p>
+		<p>
+			行の数と列の数を指定し，
+			各成分を入力してください．
+		</p>
 		<p> 行 <input type="number" id="row" min=1 value=1 onchange="change_row(this.value)"> </p>
 		<p> 列 <input type="number" id="column" min=1 value=1 onchange="change_column(this.value)"> </p>
+		<select id="bracket type" onchange="print()">
+			<option value="round">丸括弧</option>
+			<option value="square">四角括弧</option>
+		</select>
 		<div id="input"><div><input size=3 id="0,0" onchange="print()"></div></div>
 		<div id="output"></div>
 		<button onclick="copy()">コピー</button>
-		<p id="copied"></p>
+		<div id="copied"></div>
+		<p>
+			上で生成した行列を横に並べることができます．
+			追加ボタンでテキストエリアを追加し，
+			コピーした行列を貼り付けてください．
+		</p>
 		<div id="matrices"><textarea onchange="product()"></textarea><button onclick="add_matrix()">追加</button></div>
 		<div id="product"></div>
 		<button onclick="copy_product()">コピー</button>
-		<p id="copied_product"></p>
+		<div id="copied_product"></div>
 		<script type="text/javascript" src="script.js"></script>
 	</body>
 </html>
